@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Navigation from '@/components/navigation';
+import Footer from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 import {
   ArrowRight,
   CheckCircle2,
@@ -31,18 +32,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-
     // GSAP Animations - Optimized
     const ctx = gsap.context(() => {
       // Hero animations
@@ -136,113 +128,13 @@ export default function Home() {
     });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       ctx.revert();
     };
   }, []);
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? 'bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/10'
-          : 'bg-transparent'
-        }`}>
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-gradient-to-br from-[#4EBE38] to-[#24981C] rounded-lg flex items-center justify-center">
-                <Leaf className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">
-                MaxAgroTech
-              </span>
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="#features" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                Features
-              </Link>
-              <Link href="#impact" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                Impact
-              </Link>
-              <Link href="#workflow" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                How It Works
-              </Link>
-              <Link href="#stakeholders" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-                Stakeholders
-              </Link>
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-[#4EBE38] to-[#24981C] hover:from-[#24981C] hover:to-[#4EBE38] text-white shadow-lg shadow-[#4EBE38]/25 transition-all duration-300"
-              >
-                Get Started
-              </Button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? (
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 ease-in-out ${mobileMenuOpen
-            ? 'max-h-96 opacity-100'
-            : 'max-h-0 opacity-0 overflow-hidden'
-          }`}>
-          <div className="px-4 py-6 bg-slate-950/95 backdrop-blur-xl border-t border-white/10 space-y-4">
-            <Link
-              href="#features"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm font-medium text-white/70 hover:text-white transition-colors py-2"
-            >
-              Features
-            </Link>
-            <Link
-              href="#impact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm font-medium text-white/70 hover:text-white transition-colors py-2"
-            >
-              Impact
-            </Link>
-            <Link
-              href="#workflow"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm font-medium text-white/70 hover:text-white transition-colors py-2"
-            >
-              How It Works
-            </Link>
-            <Link
-              href="#stakeholders"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-sm font-medium text-white/70 hover:text-white transition-colors py-2"
-            >
-              Stakeholders
-            </Link>
-            <Button
-              size="sm"
-              className="w-full bg-gradient-to-r from-[#4EBE38] to-[#24981C] hover:from-[#24981C] hover:to-[#4EBE38] text-white shadow-lg shadow-[#4EBE38]/25 transition-all duration-300"
-            >
-              Get Started
-            </Button>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
@@ -754,73 +646,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer - Modern */}
-      <footer className="bg-[#000074] text-white py-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.1) 1px, transparent 0)`,
-            backgroundSize: '30px 30px'
-          }} />
-        </div>
-
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-            <div className="lg:col-span-2">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="h-10 w-10 bg-gradient-to-br from-[#4EBE38] to-[#24981C] rounded-xl flex items-center justify-center">
-                  <Leaf className="h-6 w-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold">MaxAgroTech</span>
-              </div>
-              <p className="text-white/70 mb-6 max-w-sm">
-                Revolutionizing agriculture through digital innovation. Not just a platform but a revolution.
-              </p>
-              <div className="flex gap-3">
-                {['twitter', 'linkedin', 'facebook'].map((social) => (
-                  <Link key={social} href={`#${social}`}>
-                    <div className="h-10 w-10 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
-                      <Globe className="h-5 w-5" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4 text-lg">Platform</h4>
-              <ul className="space-y-3 text-white/70">
-                <li><Link href="#features" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />Features</Link></li>
-                <li><Link href="#impact" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />Impact</Link></li>
-                <li><Link href="#workflow" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />How It Works</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4 text-lg">Company</h4>
-              <ul className="space-y-3 text-white/70">
-                <li><Link href="#" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />About Us</Link></li>
-                <li><Link href="#" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />Careers</Link></li>
-                <li><Link href="#" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />Contact</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold mb-4 text-lg">Legal</h4>
-              <ul className="space-y-3 text-white/70">
-                <li><Link href="#" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />Privacy Policy</Link></li>
-                <li><Link href="#" className="hover:text-[#4EBE38] transition-colors flex items-center gap-2"><ChevronRight className="h-4 w-4" />Terms of Service</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <Separator className="bg-white/10 mb-8" />
-
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
-            <p>&copy; 2025 MaxAgroTech. All rights reserved.</p>
-            <p>Made with <span className="text-[#4EBE38]">♥</span> in Northern Nigeria</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
