@@ -33,29 +33,21 @@ export default function GetStartedPage() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Hero animations
-            gsap.from('.hero-badge', {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                ease: 'power2.out'
-            });
+            // Hero animations - immediate start
+            gsap.fromTo('.hero-badge',
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+            );
 
-            gsap.from('.hero-headline', {
-                opacity: 0,
-                y: 30,
-                duration: 0.8,
-                delay: 0.2,
-                ease: 'power2.out'
-            });
+            gsap.fromTo('.hero-headline',
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.8, delay: 0.1, ease: 'power2.out' }
+            );
 
-            gsap.from('.hero-description', {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                delay: 0.4,
-                ease: 'power2.out'
-            });
+            gsap.fromTo('.hero-description',
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' }
+            );
 
             // Section animations
             const sections = gsap.utils.toArray('.animate-section');

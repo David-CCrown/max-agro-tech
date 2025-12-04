@@ -32,29 +32,21 @@ export default function TeamsPage() {
     useEffect(() => {
         // GSAP Animations
         const ctx = gsap.context(() => {
-            // Hero animations
-            gsap.from('.hero-badge', {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                ease: 'power2.out'
-            });
+            // Hero animations - immediate start
+            gsap.fromTo('.hero-badge',
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+            );
 
-            gsap.from('.hero-headline', {
-                opacity: 0,
-                y: 30,
-                duration: 0.8,
-                delay: 0.2,
-                ease: 'power2.out'
-            });
+            gsap.fromTo('.hero-headline',
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.8, delay: 0.1, ease: 'power2.out' }
+            );
 
-            gsap.from('.hero-description', {
-                opacity: 0,
-                y: 20,
-                duration: 0.6,
-                delay: 0.4,
-                ease: 'power2.out'
-            });
+            gsap.fromTo('.hero-description',
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' }
+            );
 
             // Section animations
             const sections = gsap.utils.toArray('.animate-section');
@@ -106,70 +98,94 @@ export default function TeamsPage() {
 
     const leadership = [
         {
-            name: 'Dr. Amina Bello',
-            role: 'CEO & Co-Founder',
-            image: '/team/amina.jpg',
-            bio: '15+ years in agricultural technology and supply chain management',
+            name: 'Mansur Ibrahim Muhammad',
+            role: 'Founder/CEO',
+            image: '/Team-20251204T053539Z-1-001/Team/Max-CEO/Mansur Ibrahim Muhammed.jpg',
+            bio: 'Visionary leader driving the mission to transform agriculture in Nigeria.',
             linkedin: '#',
             twitter: '#',
-            email: 'amina@maxagrotech.com'
+            email: 'mansur@maxagrotech.com'
         },
         {
-            name: 'Chidi Okonkwo',
-            role: 'CTO & Co-Founder',
-            image: '/team/chidi.jpg',
-            bio: 'Former lead engineer at major agritech platforms',
+            name: 'Nkemjika Emmanuel Amah',
+            role: 'Co-founder/CTO',
+            image: '/Team-20251204T053539Z-1-001/Team/Nkem/Nkemjika E. Amah.jpg',
+            bio: 'Technical architect building scalable solutions for the agricultural sector.',
             linkedin: '#',
             twitter: '#',
-            email: 'chidi@maxagrotech.com'
+            email: 'nkemjika@maxagrotech.com'
         },
         {
-            name: 'Fatima Ibrahim',
-            role: 'Head of Operations',
-            image: '/team/fatima.jpg',
-            bio: 'Expert in farmer engagement and rural logistics',
+            name: 'Lovina Itse',
+            role: 'Co-founder/Head Of Media',
+            image: '/Team-20251204T053539Z-1-001/Team/Veena/Lovina Itse.jpeg',
+            bio: 'Creative strategist amplifying our story and impact across media channels.',
             linkedin: '#',
             twitter: '#',
-            email: 'fatima@maxagrotech.com'
+            email: 'lovina@maxagrotech.com'
         }
     ];
 
     const team = [
         {
-            name: 'Yusuf Mohammed',
-            role: 'Head of Product',
-            department: 'Product',
-            image: '/team/yusuf.jpg'
+            name: 'Cenoyamba Danladi',
+            role: 'Confidential Secretary',
+            department: 'Administration',
+            image: null
         },
         {
-            name: 'Ngozi Eze',
-            role: 'Lead Developer',
+            name: 'David James',
+            role: 'Senior Developer',
             department: 'Engineering',
-            image: '/team/ngozi.jpg'
+            image: '/Team-20251204T053539Z-1-001/Team/Aeko-Software Developer/David Adakole James.jpg'
         },
         {
-            name: 'Ibrahim Musa',
-            role: 'Head of Partnerships',
-            department: 'Business',
-            image: '/team/ibrahim.jpg'
+            name: 'Joshua Wasanmaza Maiwada',
+            role: 'Senior Developer',
+            department: 'Engineering',
+            image: null
         },
         {
-            name: 'Blessing Adeyemi',
-            role: 'UX Designer',
-            department: 'Design',
-            image: '/team/blessing.jpg'
+            name: 'Iklima Banangida',
+            role: 'Senior Developer',
+            department: 'Engineering',
+            image: null
         },
         {
-            name: 'Tunde Ajayi',
-            role: 'Data Scientist',
-            department: 'Analytics',
-            image: '/team/tunde.jpg'
+            name: 'Victory Chukwu',
+            role: 'Staff',
+            department: 'Operations',
+            image: null
         },
         {
-            name: 'Zainab Hassan',
-            role: 'Community Manager',
-            department: 'Community',
-            image: '/team/zainab.jpg'
+            name: 'Halima Yakubu',
+            role: 'Staff',
+            department: 'Operations',
+            image: null
+        },
+        {
+            name: 'Anas Abubakar Sadiq',
+            role: 'Staff',
+            department: 'Operations',
+            image: null
+        },
+        {
+            name: 'Aisha Yelwa',
+            role: 'Staff',
+            department: 'Operations',
+            image: null
+        },
+        {
+            name: 'Victor Joshua',
+            role: 'Staff',
+            department: 'Operations',
+            image: null
+        },
+        {
+            name: 'Felix Chinoso Emmanuel',
+            role: 'Staff',
+            department: 'Operations',
+            image: null
         }
     ];
 
@@ -268,9 +284,17 @@ export default function TeamsPage() {
                             <Card key={index} className="group hover:shadow-2xl transition-all duration-500 border-0 bg-white relative overflow-hidden">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#4EBE38]/10 to-transparent rounded-full blur-2xl" />
                                 <CardContent className="pt-8 relative">
-                                    {/* Avatar Placeholder */}
-                                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#4EBE38] to-[#24981C] flex items-center justify-center text-white text-4xl font-bold">
-                                        {leader.name.split(' ').map(n => n[0]).join('')}
+                                    {/* Avatar */}
+                                    <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-[#4EBE38] to-[#24981C] flex items-center justify-center text-white text-4xl font-bold relative shadow-lg">
+                                        {leader.image ? (
+                                            <img
+                                                src={leader.image}
+                                                alt={leader.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            leader.name.split(' ').map(n => n[0]).join('')
+                                        )}
                                     </div>
 
                                     <div className="text-center mb-6">
@@ -324,8 +348,16 @@ export default function TeamsPage() {
                         {team.map((member, index) => (
                             <Card key={index} className="group hover:shadow-xl hover:-translate-y-1 transition-all duration-500 border-0 bg-white">
                                 <CardContent className="pt-6">
-                                    <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#000074] to-[#0140AC] flex items-center justify-center text-white text-2xl font-bold">
-                                        {member.name.split(' ').map(n => n[0]).join('')}
+                                    <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-[#000074] to-[#0140AC] flex items-center justify-center text-white text-2xl font-bold relative shadow-md">
+                                        {member.image ? (
+                                            <img
+                                                src={member.image}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            member.name.split(' ').map(n => n[0]).join('')
+                                        )}
                                     </div>
 
                                     <div className="text-center">
