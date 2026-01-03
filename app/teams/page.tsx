@@ -24,6 +24,8 @@ import {
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AvatarImage } from '@/components/ui/avatar';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -128,10 +130,10 @@ export default function TeamsPage() {
 
     const team = [
         {
-            name: 'Cenoyamba Danladi',
-            role: 'Confidential Secretary',
-            department: 'Administration',
-            image: null
+            name: 'Saadatu Jumare Yusuf',
+            role: 'Data Research Analyst',
+            department: 'Data',
+            image: '/Team-20251204T053539Z-1-001/Team/TechFarmer/SAADATU JUMARE YUSUF.png'
         },
         {
             name: 'David James',
@@ -140,53 +142,23 @@ export default function TeamsPage() {
             image: '/Team-20251204T053539Z-1-001/Team/Aeko-Software Developer/David Adakole James.jpg'
         },
         {
-            name: 'Joshua Wasanmaza Maiwada',
-            role: 'Senior Developer',
+            name: 'David Akhabue',
+            role: 'AI/ML Engineer',
             department: 'Engineering',
-            image: null
+            image: '/Team-20251204T053539Z-1-001/Team/Code/David Akhabue.jpg'
         },
         {
-            name: 'Iklima Banangida',
-            role: 'Senior Developer',
-            department: 'Engineering',
-            image: null
-        },
-        {
-            name: 'Victory Chukwu',
-            role: 'Staff',
-            department: 'Operations',
-            image: null
-        },
-        {
-            name: 'Halima Yakubu',
-            role: 'Staff',
-            department: 'Operations',
-            image: null
-        },
-        {
-            name: 'Anas Abubakar Sadiq',
-            role: 'Staff',
-            department: 'Operations',
-            image: null
-        },
-        {
-            name: 'Aisha Yelwa',
-            role: 'Staff',
-            department: 'Operations',
-            image: null
-        },
-        {
-            name: 'Victor Joshua',
-            role: 'Staff',
-            department: 'Operations',
-            image: null
+            name: 'Amah Blessing Purity',
+            role: 'Graphic Designer',
+            department: 'Product Design',
+            image: '/Team-20251204T053539Z-1-001/Team/Purity/Purity.jpg'
         },
         {
             name: 'Felix Chinoso Emmanuel',
-            role: 'Staff',
-            department: 'Operations',
+            role: 'Developer',
+            department: 'Engineering',
             image: null
-        }
+        },
     ];
 
     const values = [
@@ -287,9 +259,11 @@ export default function TeamsPage() {
                                     {/* Avatar */}
                                     <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-to-br from-[#4EBE38] to-[#24981C] flex items-center justify-center text-white text-4xl font-bold relative shadow-lg">
                                         {leader.image ? (
-                                            <img
+                                            <Image
                                                 src={leader.image}
                                                 alt={leader.name}
+                                                width={200}
+                                                height={200}
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : (
@@ -350,9 +324,11 @@ export default function TeamsPage() {
                                 <CardContent className="pt-6">
                                     <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-[#000074] to-[#0140AC] flex items-center justify-center text-white text-2xl font-bold relative shadow-md">
                                         {member.image ? (
-                                            <img
+                                            <Image
                                                 src={member.image}
                                                 alt={member.name}
+                                                width={100}
+                                                height={100}
                                                 className="w-full h-full object-cover"
                                             />
                                         ) : (

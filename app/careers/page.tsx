@@ -9,6 +9,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import {
     ArrowRight,
     Briefcase,
     MapPin,
@@ -255,7 +262,6 @@ export default function CareersPage() {
     return (
         <div className="min-h-screen">
             <Navigation />
-
             {/* Hero Section */}
             <section className="relative min-h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-[#1a4d2e] via-[#24981C] to-[#4EBE38]">
                 {/* Noise Texture */}
@@ -405,124 +411,125 @@ export default function CareersPage() {
             </section>
 
             {/* Application Modal */}
-            {selectedJob && (
-                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <Card className="max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                        <CardHeader className="sticky top-0 bg-white z-10 border-b">
-                            <div className="flex items-start justify-between">
+            <Dialog open={!!selectedJob} onOpenChange={(open) => !open && setSelectedJob(null)}>
+                <div className='overflow-y-hidden'>
+                    <DialogContent className="w-[calc(100%-2rem)] max-w-3xl max-h-[90vh] overflow-y-auto">
+
+                        <DialogHeader>
+                            <div className="flex items-start justify-between pr-8">
                                 <div>
-                                    <CardTitle className="text-2xl mb-2">{selectedJob.title}</CardTitle>
+                                    <DialogTitle className="text-2xl mb-2">{selectedJob?.title}</DialogTitle>
                                     <div className="flex flex-wrap gap-2">
-                                        <Badge className="bg-[#4EBE38]/10 text-[#4EBE38]">{selectedJob.department}</Badge>
-                                        <Badge variant="outline">{selectedJob.type}</Badge>
+                                        <Badge className="bg-[#4EBE38]/10 text-[#4EBE38]">{selectedJob?.department}</Badge>
+                                        <Badge variant="outline">{selectedJob?.type}</Badge>
                                     </div>
                                 </div>
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => setSelectedJob(null)}
-                                >
-                                    <X className="h-5 w-5" />
-                                </Button>
                             </div>
-                        </CardHeader>
-                        <CardContent className="pt-6 space-y-6">
-                            <div>
-                                <h3 className="text-lg font-semibold mb-3">About the Role</h3>
-                                <p className="text-gray-600">{selectedJob.description}</p>
-                            </div>
+                        </DialogHeader>
 
-                            <Separator />
+                        {selectedJob && (
+                            <div className="space-y-6">
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-3">About the Role</h3>
+                                    <DialogDescription className="text-gray-600 text-base">
+                                        {selectedJob.description}
+                                    </DialogDescription>
+                                </div>
 
-                            <div>
-                                <h3 className="text-lg font-semibold mb-3">Requirements</h3>
-                                <ul className="space-y-2">
-                                    {selectedJob.requirements.map((req, i) => (
-                                        <li key={i} className="flex items-start gap-2 text-gray-600">
-                                            <CheckCircle2 className="h-5 w-5 text-[#4EBE38] flex-shrink-0 mt-0.5" />
-                                            <span>{req}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                <Separator />
 
-                            <Separator />
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-3">Requirements</h3>
+                                    <ul className="space-y-2">
+                                        {selectedJob.requirements.map((req, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-gray-600">
+                                                <CheckCircle2 className="h-5 w-5 text-[#4EBE38] flex-shrink-0 mt-0.5" />
+                                                <span>{req}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
 
-                            <div>
-                                <h3 className="text-lg font-semibold mb-3">Responsibilities</h3>
-                                <ul className="space-y-2">
-                                    {selectedJob.responsibilities.map((resp, i) => (
-                                        <li key={i} className="flex items-start gap-2 text-gray-600">
-                                            <CheckCircle2 className="h-5 w-5 text-[#4EBE38] flex-shrink-0 mt-0.5" />
-                                            <span>{resp}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                                <Separator />
 
-                            <Separator />
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-3">Responsibilities</h3>
+                                    <ul className="space-y-2">
+                                        {selectedJob.responsibilities.map((resp, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-gray-600">
+                                                <CheckCircle2 className="h-5 w-5 text-[#4EBE38] flex-shrink-0 mt-0.5" />
+                                                <span>{resp}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
 
-                            <div>
-                                <h3 className="text-lg font-semibold mb-4">Apply for this Position</h3>
-                                <div className="space-y-4">
-                                    <div>
-                                        <label className="text-sm font-medium text-gray-700 mb-2 block">Full Name *</label>
-                                        <input
-                                            type="text"
-                                            placeholder="John Doe"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
-                                        />
+                                <Separator />
+
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-4">Apply for this Position</h3>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">Full Name *</label>
+                                            <input
+                                                type="text"
+                                                placeholder="John Doe"
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">Email Address *</label>
+                                            <input
+                                                type="email"
+                                                placeholder="john@example.com"
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">Phone Number *</label>
+                                            <input
+                                                type="tel"
+                                                placeholder="+234 XXX XXX XXXX"
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">LinkedIn Profile</label>
+                                            <input
+                                                type="url"
+                                                placeholder="https://linkedin.com/in/yourprofile"
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">Resume/CV *</label>
+                                            <input
+                                                type="file"
+                                                accept=".pdf,.doc,.docx"
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="text-sm font-medium text-gray-700 mb-2 block">Cover Letter</label>
+                                            <textarea
+                                                rows={4}
+                                                placeholder="Tell us why you're a great fit for this role..."
+                                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all resize-none"
+                                            />
+                                        </div>
+                                        <Button className="w-full bg-gradient-to-r from-[#4EBE38] to-[#24981C] hover:from-[#24981C] hover:to-[#4EBE38] text-white h-12 text-base font-semibold shadow-lg shadow-[#4EBE38]/25">
+                                            Submit Application
+                                            <ArrowRight className="ml-2 h-5 w-5" />
+                                        </Button>
                                     </div>
-                                    <div>
-                                        <label className="text-sm font-medium text-gray-700 mb-2 block">Email Address *</label>
-                                        <input
-                                            type="email"
-                                            placeholder="john@example.com"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="text-sm font-medium text-gray-700 mb-2 block">Phone Number *</label>
-                                        <input
-                                            type="tel"
-                                            placeholder="+234 XXX XXX XXXX"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="text-sm font-medium text-gray-700 mb-2 block">LinkedIn Profile</label>
-                                        <input
-                                            type="url"
-                                            placeholder="https://linkedin.com/in/yourprofile"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="text-sm font-medium text-gray-700 mb-2 block">Resume/CV *</label>
-                                        <input
-                                            type="file"
-                                            accept=".pdf,.doc,.docx"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="text-sm font-medium text-gray-700 mb-2 block">Cover Letter</label>
-                                        <textarea
-                                            rows={4}
-                                            placeholder="Tell us why you're a great fit for this role..."
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4EBE38] focus:ring-2 focus:ring-[#4EBE38]/20 outline-none transition-all resize-none"
-                                        />
-                                    </div>
-                                    <Button className="w-full bg-gradient-to-r from-[#4EBE38] to-[#24981C] hover:from-[#24981C] hover:to-[#4EBE38] text-white h-12 text-base font-semibold shadow-lg shadow-[#4EBE38]/25">
-                                        Submit Application
-                                        <ArrowRight className="ml-2 h-5 w-5" />
-                                    </Button>
                                 </div>
                             </div>
-                        </CardContent>
-                    </Card>
+                        )}
+
+                    </DialogContent>
                 </div>
-            )}
+
+            </Dialog>
 
             <Footer />
         </div>

@@ -30,7 +30,7 @@ export default function Navigation() {
         { href: '/#features', label: 'Features', homeOnly: true },
         { href: '/#impact', label: 'Impact', homeOnly: true },
         { href: '/#workflow', label: 'How It Works', homeOnly: true },
-        { href: '/marketplace', label: 'Marketplace', homeOnly: false },
+        // { href: '/marketplace', label: 'Marketplace', homeOnly: false },
         { href: '/teams', label: 'Team', homeOnly: false },
     ];
 
@@ -66,7 +66,7 @@ export default function Navigation() {
                                     className={`text-sm font-medium transition-colors ${isActive
                                         ? 'text-white'
                                         : 'text-white/70 hover:text-white'
-                                        }`}
+                                        } ${pathname === "/" && !link.homeOnly && visibleLinks.filter(l=> !l.homeOnly)[0].href === link.href ? "ml-3 pl-4 border-l border-white/40" : ""}`}
                                 >
                                     {link.label}
                                 </Link>
